@@ -12,6 +12,6 @@ setup(name='cabot-alert-opsgenie',
       author_email='dbarlaro@gmail.com',
       url='http://github.com/dibits',
       packages=[
-          'cabot_alert_skeleton'
+          'cabot_alert_opsgenie'
       ],
       )

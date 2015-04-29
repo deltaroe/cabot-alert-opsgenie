@@ -61,7 +61,7 @@ class OpsGenieAlert(AlertPlugin):
 
         payload = {
             'apiKey': env['OPSGENIE_KEY'],
-            'alias': service,
+            'alias': service.name,
             }
 
         if priority > 0:

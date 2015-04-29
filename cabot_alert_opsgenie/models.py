@@ -72,7 +72,7 @@ class OpsGenieAlert(AlertPlugin):
             payload['note'] = message
             opsgenie_url += 'close'
 
-        requests.post(opsgenie_url, data=payload)
+        requests.post(opsgenie_url, data=payload, headers=headers)
 
         return
 

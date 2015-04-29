@@ -52,7 +52,7 @@ class OpsGenieAlert(AlertPlugin):
 
             message = Template(opsgenie_template).render(c)
 
-            self._send_pushover_alert(message, user_or_group=data.user_or_group, priority=priority, service=service)
+            self._send_opsgenie_alert(message, user_or_group=data.user_or_group, priority=priority, service=service)
 
     def _send_opsgenie_alert(self, message, user_or_group, service, priority=0):
         opsgenie_url = 'https://api.opsgenie.com/v1/json/'

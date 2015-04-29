@@ -70,7 +70,7 @@ class OpsGenieAlert(AlertPlugin):
         else:
             payload['notify'] = user_or_group
             payload['note'] = message
-            opsgenie_url += 'close'
+            opsgenie_url += '/close'
 
         requests.post(opsgenie_url, data=json.dumps(payload), headers=headers)
 

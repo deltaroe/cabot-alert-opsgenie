@@ -9,6 +9,7 @@ from cabot.cabotapp.alert import AlertPlugin, AlertPluginUserData
 
 from os import environ as env
 import requests
+import json
 
 opsgenie_template = "Service {{ service.name }} {% if service.overall_status == service.PASSING_STATUS %}is back to normal{% else %}reporting {{ service.overall_status }} status{% endif %}: {{ scheme }}://{{ host }}{% url 'service' pk=service.id %}."
 
@@ -55,7 +56,7 @@ class OpsGenieAlert(AlertPlugin):
             self._send_opsgenie_alert(message, user_or_group=data.user_or_group, priority=priority, service=service)
 
     def _send_opsgenie_alert(self, message, user_or_group, service, priority=0):
-        opsgenie_url = 'https://api.opsgenie.com/v1/json/'
+        opsgenie_url = 'https://api.opsgenie.com/v1/json/alert'
         headers = {'content-type': 'application/json'}
 
         payload = {
@@ -66,13 +67,12 @@ class OpsGenieAlert(AlertPlugin):
         if priority > 0:
             payload['recipients'] = user_or_group
             payload['message'] = message
-            opsgenie_url += 'alert'
         else:
             payload['notify'] = user_or_group
             payload['note'] = message
             opsgenie_url += 'close'
 
-        requests.post(opsgenie_url, data=payload, headers=headers)
+        requests.post(opsgenie_url, data=json.dumps(payload), headers=headers)
 
         return
 

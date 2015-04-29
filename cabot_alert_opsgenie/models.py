@@ -59,7 +59,7 @@ class OpsGenieAlert(AlertPlugin):
         headers = {'content-type': 'application/json'}
 
         payload = {
-            'customerKey':env['OPSGENIE_KEY'],
+            'apiKey': env['OPSGENIE_KEY'],
             'alias': service,
             }
 

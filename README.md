@@ -1,7 +1,8 @@
 Cabot OpsGenie Plugin
 =====
 
-This plugin allows you to send alerts to OpsGenie. It needs an app API key, and user/group IDs for each user.
+This plugin allows you to send alerts to [OpsGenie](http://opsgenie.com) from [Cabot](http://cabotapp.com/). It needs an app API key, and user/group IDs for each user.
+Based on [cabot-alert-pushver](https://github.com/packetcollision/cabot-alert-pushover)
 
 Installation
 ----

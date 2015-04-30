@@ -7,7 +7,7 @@ Based on [cabot-alert-pushover](https://github.com/packetcollision/cabot-alert-p
 Installation
 ----
 1. Activate the Cabot venv
-2. Run `pip install git+git://github.com/dibits/cabot-alert-opsgenie.git`
+2. Run `pip install cabot-alert-opsgenie`
 3. Add cabot_alert_opsgenie==0.0.1 to the CABOT_PLUGINS_ENABLED list in *\<environment\>*.env
 4. Add `OPSGENIE_KEY=<YOUR_OPSGENIE_KEY>`
 5. Stop Cabot

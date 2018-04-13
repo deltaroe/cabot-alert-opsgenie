@@ -6,7 +6,7 @@ __author__ = '\n     ~\n    . .\n    /V\\\n   // \\\\\n  /(___)\\\n   ^ ~ ^\nd i
 from setuptools import setup
 
 setup(name='cabot-alert-opsgenie',
-      version='0.0.1',
+      version='0.0.2',
       description='OpsGenie plugin for Cabot by Arachnys',
       author='dibits',
       author_email='dbarlaro@gmail.com',

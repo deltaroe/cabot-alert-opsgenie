@@ -8,7 +8,7 @@ Installation
 ----
 1. Activate the Cabot venv
 2. Run `pip install cabot-alert-opsgenie`
-3. Add cabot_alert_opsgenie==0.0.1 to the CABOT_PLUGINS_ENABLED list in *\<environment\>*.env
+3. Add cabot_alert_opsgenie==0.0.2 to the CABOT_PLUGINS_ENABLED list in *\<environment\>*.env
 4. Add `OPSGENIE_KEY=<YOUR_OPSGENIE_KEY>`
 5. Stop Cabot
 6. Run `foreman run python manage.py syncdb`

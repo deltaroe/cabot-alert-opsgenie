@@ -11,8 +11,8 @@ from os import environ as env
 import requests
 import json
 
-opsgenie_template = """Service {{ service.name }} {{ scheme }}://{{ host }}{% url 'service' pk=service.id %} {% if service.overall_status != service.PASSING_STATUS %}alerting with status: {{ service.overall_status }}{% else %}is back to normal{% endif %}.
-{% if service.overall_status != service.PASSING_STATUS %}
+opsgenie_message_template = "Service {{ service.name }} {% if service.overall_status == service.PASSING_STATUS %}is back to normal{% else %}reporting {{ service.overall_status }} status{% endif %}: {{ scheme }}://{{ host }}{% url 'service' pk=service.id %}."
+opsgenie_description_template = """{% if service.overall_status != service.PASSING_STATUS %}
 CHECKS FAILING:{% for check in service.all_failing_checks %}
   FAILING - {{ check.name }} - Type: {{ check.check_category }} - Importance: {{ check.get_importance_display }}{% endfor %}
 {% if service.all_passing_checks %}
@@ -36,7 +36,8 @@ class OpsGenieAlert(AlertPlugin):
             'scheme': settings.WWW_SCHEME,
             })
 
-        message = Template(opsgenie_template).render(c)
+        message = Template(opsgenie_message_template).render(c)
+        description = Template(opsgenie_description_template).render(c)
 
         if service.overall_status == service.PASSING_STATUS:
             self._close_opsgenie_alert(message=message, service=service)
@@ -53,15 +54,16 @@ class OpsGenieAlert(AlertPlugin):
             if not alert:
                 return
 
-            self._create_opsgenie_alert(message=message, priority=priority, service=service)
+            self._create_opsgenie_alert(message=message, priority=priority, service=service, description=description)
 
-    def _create_opsgenie_alert(self, message, service, priority=0):
+    def _create_opsgenie_alert(self, message, service, description='', priority=0):
         opsgenie_url = 'https://api.opsgenie.com/v2/alerts'
 
         payload = {
             'message': message,
             'alias': service.name,
             'priority': priority,
+            'description': description
         }
         self._send_opsgenie_alert(opsgenie_url=opsgenie_url, payload=payload)
 
